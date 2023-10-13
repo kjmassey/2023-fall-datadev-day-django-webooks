@@ -1,0 +1,5 @@
+constants.py
+scratch.py
+venv/
+.vscode/
+__pycache__/
