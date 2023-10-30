@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from constants import DB_HOST, DB_PASSWORD, DB_PORT, DB_SCHEMA, DB_USER
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -86,11 +87,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "webhooks",
-        "USER": "admin",
-        "PASSWORD": "Novigr4d!",
-        "HOST": "webhooks.caxbwnwjcwdg.us-east-1.rds.amazonaws.com",
-        "PORT": "3306",
+        "NAME": f"{DB_SCHEMA}",
+        "USER": f"{DB_USER}",
+        "PASSWORD": f"{DB_PASSWORD}",
+        "HOST": f"{DB_HOST}",
+        "PORT": f"{DB_PORT}",
     }
 }
 
