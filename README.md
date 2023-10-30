@@ -7,6 +7,7 @@
 - Django + djangorestframework
 - MySQL via AWS RDS
 - tableauserverclient (TSC)
+- [Click here](https://github.com/kjmassey/vue-tableau-webhooks-ui) for frontend source
 
 ### Installation
 ##### NOTE: Exact cli/terminal syntax may vary by OS
@@ -19,22 +20,45 @@
    - *pip install -r requirements.txt*
    - *django-admin --version*
    - If your terminal returns a version number, you're good to go!
+4. Activate your virtualenv
+   - e.g. *source venv/Scripts/activate* (bash)
+
+### Constants Configuration
+1. Open **constants.py**
+2. Add your values for the following:
+   ```
+   # Database config
+   DB_USER = "YOUR_DB_USER"
+   DB_PASSWORD = "YOUR_DB_PASSWORD"
+   DB_HOST = "YOUR_DB_HOST"
+   DB_PORT = "YOUR_DB_PORT"
+   DB_SCHEMA = "YOUR_DB_SCHEMA"
+
+   # Tableau Personal Access Token
+   PAT_NAME = "YOUR_PAT_NAME"
+   PAT_SECRET = "YOUR_PAT_SECRET"
+
+   # Tableau Server Config
+   TSC_SERVER_URL = "YOUR_TABLEAU_SERVER_URL"
+   TSC_SITE_NAME = "YOUR_SITE_NAME"
+   ```
 
 ### Database Configuration
 ##### NOTE: This can be done with any database that django/drf supports! AWS MySQL is used here.
-1. Open **config > settings.py**
-2. Starting on line 86:
+
+###### If using MySQL, these settings do not need to be changed
+1. If changes are needed, open **config > settings.py**
+2. Make updates starting on line 86:
    ```
    DATABASES = {
-        "default": {
-            ### CHANGE THIS BASED ON YOUR DB
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": "{{ DATABASE/SCHEMA NAME }}",
-            "USER": "{{ YOUR DB UID }}",
-            "PASSWORD": "{{ YOUR DB PW }}",
-            "HOST": "{{ YOUR DB HOST }}",
-            "PORT": "3306",
-        }
+      "default": {
+         "ENGINE": "django.db.backends.mysql",
+         "NAME": f"{DB_SCHEMA}",
+         "USER": f"{DB_USER}",
+         "PASSWORD": f"{DB_PASSWORD}",
+         "HOST": f"{DB_HOST}",
+         "PORT": f"{DB_PORT}",
+      }
    }
     ```
 
